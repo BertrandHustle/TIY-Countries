@@ -17,8 +17,6 @@ public class Main {
 
         //init
 
-        ArrayList<String> abbr = new ArrayList<>();
-        ArrayList<String> names = new ArrayList<>();
         ArrayList<Country> countries = new ArrayList<>();
         ArrayList<Character> hashChar = new ArrayList<>();
 
@@ -29,31 +27,24 @@ public class Main {
             String item = scanner.nextLine();
             hashChar.add(item.charAt(3));
 
-            abbr.add(Arrays.toString(item.split("(\\|).+")));
-            names.add(Arrays.toString(item.split(".*(\\|)")));
+            ArrayList<String> abbr = new ArrayList<>(Arrays.asList(item.split("(\\|).+")));
             //trim here?
+            ArrayList<String> names = new ArrayList<>(Arrays.asList(item.split("[A-Z]..")));
+
+            System.out.println(abbr);
+            System.out.println(names);
+
+            Country country = new Country(abbr.get(0), names.get(1));
+            countries.add(country);
+
+            System.out.println(names.get(1));
 
         }
-
-        System.out.println(abbr);
-        System.out.println(names);
-
-        //abbr.add(abbrArray);
-        //names.add(namesArray);
 
         //construct countries
 
-        for (int i = 0; i < names.size(); ++i){
-
-
-
-            Country country = new Country(names.get(i), abbr.get(i));
-            countries.add(country);
-
-        }
-
         for(Country country : countries){
-            System.out.println(country.getAbbreviation() + country.getName());
+            System.out.println(country);
         }
 
     }

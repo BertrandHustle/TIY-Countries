@@ -19,4 +19,11 @@ public class Country {
     public String getAbbreviation() {
         return abbreviation;
     }
+
+    @Override
+    public String toString(){
+
+        return this.name + " " + this.abbreviation;
+
+    }
 }
