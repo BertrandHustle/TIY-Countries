@@ -15,16 +15,46 @@ public class Main {
         File file = new File("countries.txt");
         Scanner scanner = new Scanner(file);
 
+        //init
+
+        ArrayList<String> abbr = new ArrayList<>();
+        ArrayList<String> names = new ArrayList<>();
+        ArrayList<Country> countries = new ArrayList<>();
+        ArrayList<Character> hashChar = new ArrayList<>();
+
+        /*scans countries.txt and creates separate arrays for abbrevations and names
+        along with first letter in each name*/
+
         while (scanner.hasNext()) {
             String item = scanner.nextLine();
-            char hashChar = item.charAt(3);
+            hashChar.add(item.charAt(3));
 
-            String[] abbr = item.split("(\\|).+");
-            System.out.println(Arrays.toString(abbr));
+            abbr.add(Arrays.toString(item.split("(\\|).+")));
+            names.add(Arrays.toString(item.split(".*(\\|)")));
+            //trim here?
 
         }
 
-        //construct country
+        System.out.println(abbr);
+        System.out.println(names);
+
+        //abbr.add(abbrArray);
+        //names.add(namesArray);
+
+        //construct countries
+
+        for (int i = 0; i < names.size(); ++i){
+
+
+
+            Country country = new Country(names.get(i), abbr.get(i));
+            countries.add(country);
+
+        }
+
+        for(Country country : countries){
+            System.out.println(country.getAbbreviation() + country.getName());
+        }
 
     }
 
