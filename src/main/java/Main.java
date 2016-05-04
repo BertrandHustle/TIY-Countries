@@ -6,7 +6,7 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) throws IOException{
 
-        //holds countries by first letter, arraylist of countries
+        //hashmap that holds countries by first letter, arraylist of countries
         HashMap<Character, ArrayList<Country>> hashmap = new HashMap<Character, ArrayList<Country>>();
 
         File file = new File("countries.txt");
@@ -31,11 +31,6 @@ public class Main {
             countries.add(country);
 
         }
-
-
-
-        //construct arrays by letter
-
 
         //add country arrays/letters to hashmap
 
@@ -64,29 +59,28 @@ public class Main {
         Scanner input = new Scanner(System.in);
         char inputLetter;
 
-        System.out.println("Please enter a letter.");
+        //gets user input
+
+        System.out.println("Please enter an uppercase letter.");
 
         String answer = input.nextLine();
 
-
-        //gets user input
+        //checks if input is an uppercase letter
 
         Character answerChar = answer.charAt(0);
+        boolean isL = Character.isLetter(answerChar);
+        boolean isU = Character.isUpperCase(answerChar);
 
-        //needs to check if input is letter
-        if (answer.length() != 1) {
-            System.out.println("Enter a single letter please!");
+        //exception for non-uppercase letters or non-letters
+        if (answer.length() != 1 || !isL || !isU) {
+            System.out.println("Enter a single uppercase letter please!");
             throw new InputMismatchException();
         } else {
             inputLetter = answer.charAt(0);
         }
 
-        //System.out.println(inputLetter);
-        //System.out.println(String.valueOf(hashmap.get(inputLetter)));
-
         //writing to text file
-
-
+        
         File f = new File(inputLetter + "_countries.txt");
         FileWriter fileWriter = new FileWriter(f);
         fileWriter.write(String.valueOf(hashmap.get(inputLetter)));
